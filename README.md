@@ -43,7 +43,7 @@ Steps to install your project:
    ```
 3. Start the services using Docker Compose:
    ```bash
-     docker-compose up -d
+   docker-compose up -d
    ```
 
 
@@ -68,10 +68,10 @@ You should see all containers listed as running.
  
 1. Navigate to the Grafana folder in your project directory and run the Python scripts to populate your MySQL database:
    ```bash
-     python3 mysql_clients_page.py
-     python3 mysql_network_health.py
-     python3 mysql_issues_events.py
-     python3 mysql_license_overview.py
+   python3 mysql_clients_page.py
+   python3 mysql_network_health.py
+   python3 mysql_issues_events.py
+   python3 mysql_license_overview.py
    ```
 2. Verify that the data has been populated in phpMyAdmin. You should see new tables created with data in them.
 
@@ -116,10 +116,10 @@ You should see all containers listed as running.
  
 1. Execute the Python scripts in the Splunk folder to start sending data to Splunk:
    ```bash
-     python3 splunk_client.py
-     python3 splunk_network.py
-     python3 splunk_issues.py
-     python3 splunk_license.py
+   python3 splunk_client.py
+   python3 splunk_network.py
+   python3 splunk_issues.py
+   python3 splunk_license.py
    ```
 2. Once the scripts are running, you should see the data reflected on your Splunk dashboard.
  
