@@ -133,7 +133,6 @@ For the Splunk dashboard, the XML file should include the layout and visualizati
 
 Remember to replace any placeholder text with the actual commands and filenames used in your project.
 
-___
 
 ## Dashboard View 🎆
  
@@ -150,7 +149,7 @@ Here's what the Splunk dashboard looks like:
 Splunk Dashboard
  
  
-License 📝
+## License 📝
  
 This project is licensed under the MIT License - see the LICENSE file for details.
  
