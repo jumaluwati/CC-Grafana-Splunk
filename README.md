@@ -47,7 +47,7 @@ Steps to install your project:
    ```
 
 
-## Usage 📈
+## onfiguration & Usage  🔧
 
 After successfully installing the project using Docker, follow these steps to get your dashboards up and running:
 
@@ -135,6 +135,7 @@ Remember to replace any placeholder text with the actual commands and filenames 
 
 ___
 
+## Dashboard View 🎆
  
 ### Grafana Dashboard
  
@@ -147,13 +148,6 @@ Grafana Dashboard
 Here's what the Splunk dashboard looks like:
  
 Splunk Dashboard
- 
-## Configuration 🔧
- 
-Explain how to configure the project, including:
- 
-How to set up environment variables or config files.
-How to connect to different data sources or services.
  
  
 License 📝
