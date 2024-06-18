@@ -133,6 +133,8 @@ For the Splunk dashboard, the XML file should include the layout and visualizati
 
 Remember to replace any placeholder text with the actual commands and filenames used in your project.
 
+___
+
  
 ### Grafana Dashboard
  
