@@ -13,7 +13,3 @@ DB_CONFIG = {
     'database': 'cc_db',
     'raise_on_warnings': True,
 }
-
-# Splunk details
-SPLUNK_HEC_TOKEN = 'INSERT YOUR TOKEN HERE'
-SPLUNK_HEC_ENDPOINT = 'http://localhost:8088/services/collector'
