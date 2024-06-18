@@ -19,9 +19,15 @@ With this integration, you no longer need to navigate through multiple DNA Cente
 
 Before you begin, ensure you have met the following requirements:
 
-- You have installed the latest version of [Docker](https://www.docker.com/get-started).
-- You have a `<Windows/Linux/Mac>` machine. State which OSs are supported and which are not.
-- You have read `<guide/link/documentation_related_to_project>`.
+- **Docker**: You have installed the latest version of [Docker](https://www.docker.com/get-started). Docker is used to create, manage, and run the containers for the services your project relies on.
+- **Git**: You have installed [Git](https://git-scm.com/downloads) on your machine to clone the repository.
+- **Python**: You have Python installed on your machine to run the scripts. The project is compatible with Python 3.x.
+- **Network Knowledge**: You have a basic understanding of network management and monitoring concepts, which will help you make the most of the dashboards and data provided by the project.
+- **Cisco DNA Center**: Familiarity with Cisco DNA Center APIs is beneficial, as the project interacts with these APIs to retrieve network data.
+- **Database Knowledge**: Basic knowledge of MySQL and database operations is recommended, as the project involves pushing data to a MySQL database.
+- **Grafana & Splunk**: Familiarity with Grafana and Splunk platforms is recommended for customizing and interpreting the dashboards.
+
+No specific operating system is required as long as it can run Docker, which is available for Windows, Linux, and macOS. However, the commands provided in the documentation are for Unix-like systems and may need to be adjusted for use in Windows.
 
 ## Installation 🛠️
 
@@ -36,9 +42,9 @@ Steps to install your project:
    cd CC-Grafana-Splunk
    ```
 3. Start the services using Docker Compose:
-```bash
-  docker-compose up -d
-```
+   ```bash
+     docker-compose up -d
+   ```
 
 
 ## Usage 📈
@@ -61,12 +67,12 @@ You should see all containers listed as running.
 ### Initialize Grafana Data
  
 1. Navigate to the Grafana folder in your project directory and run the Python scripts to populate your MySQL database:
-```bash
-  python3 script1.py
-  python3 script2.py
-  python3 script3.py
-  python3 script4.py
-```
+   ```bash
+     python3 mysql_clients_page.py
+     python3 mysql_network_health.py
+     python3 mysql_issues_events.py
+     python3 mysql_license_overview.py
+   ```
 2. Verify that the data has been populated in phpMyAdmin. You should see new tables created with data in them.
 
 ### Configure Grafana
@@ -109,12 +115,12 @@ You should see all containers listed as running.
 ### Run Splunk Scripts
  
 1. Execute the Python scripts in the Splunk folder to start sending data to Splunk:
-```bash
-  python3 splunk_script1.py
-  python3 splunk_script2.py
-  python3 splunk_script3.py
-  python3 splunk_script4.py
-```
+   ```bash
+     python3 splunk_client.py
+     python3 splunk_network.py
+     python3 splunk_issues.py
+     python3 splunk_license.py
+   ```
 2. Once the scripts are running, you should see the data reflected on your Splunk dashboard.
  
 By following these steps, you should have fully functional Grafana and Splunk dashboards displaying your network data. If you encounter any issues, check the logs for each container, and ensure that all configurations match the details specified in your Docker Compose file and scripts.
