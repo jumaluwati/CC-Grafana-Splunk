@@ -144,13 +144,13 @@ Remember to replace any placeholder text with the actual commands and filenames 
  
 Here's what the Grafana dashboard looks like:
  
-Grafana Dashboard
+![Grafana Dashboard](collateral/grafana.png)
  
 ### Splunk Dashboard
  
 Here's what the Splunk dashboard looks like:
  
-Splunk Dashboard
+![Splunk Dashboard](collateral/splunk.png)
 
 
  
