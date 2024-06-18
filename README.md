@@ -49,7 +49,7 @@ Steps to install your project:
 
 
 
-## onfiguration & Usage  🔧
+## Configuration & Usage  🔧
 
 After successfully installing the project using Docker, follow these steps to get your dashboards up and running:
 
