@@ -161,7 +161,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
  
 Contact 📬
  
-Juma Luwati - jalluwar@cisco.com
+Juma Luwati - jalluwat@cisco.com
  
 Project Link: [https://github.com/jumaluwati/CC-Grafana-Splunk]
  
