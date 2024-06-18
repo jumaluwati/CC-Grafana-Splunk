@@ -2,9 +2,9 @@
 
 Before running the Grafana scripts, make sure to configure the `config.py` file with the necessary credentials and settings.
 
-### Update Splunk Configuration
+### (Optionally) Update Catalyst Center Configuration
 
-In the `config.py` file within the Grafana and Splunk folders, locate the `Common Credentials` sectiom and replace the Catalyst Center credentials if needed
+In the `config.py` file within the Grafana folder, locate the `Common Credentials` section and replace the Catalyst Center credentials if needed
 
 
 ```python
