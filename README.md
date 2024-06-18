@@ -29,6 +29,7 @@ Before you begin, ensure you have met the following requirements:
 
 No specific operating system is required as long as it can run Docker, which is available for Windows, Linux, and macOS. However, the commands provided in the documentation are for Unix-like systems and may need to be adjusted for use in Windows.
 
+
 ## Installation 🛠️
 
 Steps to install your project:
@@ -45,6 +46,7 @@ Steps to install your project:
    ```bash
    docker-compose up -d
    ```
+
 
 
 ## onfiguration & Usage  🔧
@@ -134,6 +136,8 @@ For the Splunk dashboard, the XML file should include the layout and visualizati
 Remember to replace any placeholder text with the actual commands and filenames used in your project.
 
 
+
+
 ## Dashboard View 🎆
  
 ### Grafana Dashboard
@@ -147,6 +151,8 @@ Grafana Dashboard
 Here's what the Splunk dashboard looks like:
  
 Splunk Dashboard
+
+
  
  
 ## License 📝
