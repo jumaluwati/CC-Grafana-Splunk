@@ -62,7 +62,7 @@ You should see all containers listed as running.
 ### Set Up phpMyAdmin
  
 1. Open phpMyAdmin in your web browser by navigating to http://localhost:8080.
-2. Log in with the username root and the password cisco to manage your MySQL database.
+2. Log in with root/cisco as username and password, to manage your MySQL database.
  
 ### Initialize Grafana Data
  
