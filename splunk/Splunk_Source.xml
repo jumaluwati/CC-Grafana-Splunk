@@ -1,0 +1,405 @@
+<!-- 
+To reuse this Splunk dashboard configuration or a part of it, you can follow these steps:
+ 
+Copy the XML: Copy the XML snippet or the entire dashboard XML configuration that you want to reuse.
+Create or Edit a Dashboard in Splunk:
+To create a new dashboard, navigate to the Dashboards section in Splunk and click on "Create New Dashboard." Give your dashboard a name and select the desired permissions, then click "Create."
+To edit an existing dashboard, navigate to the Dashboards section, find the dashboard you want to modify, and click "Edit."
+Import the XML:
+In the dashboard editor, switch to the "Source" mode to edit the XML directly.
+Paste your copied XML snippet into the appropriate section of the dashboard XML or replace the entire XML if you're creating a new dashboard from scratch.
+Adjust the Searches and Queries: The XML snippet includes a search query that uses the pivot command. You will need to ensure that the data model (health_score_category) and the root object (RootObject) referenced in the query exist in your Splunk environment. If not, you'll need to modify the query to match your data sources.
+Save and Test: After importing the XML and making any necessary adjustments, save the dashboard and test it to ensure that all panels, searches, and visualizations are working as expected.
+
+-->
+
+
+<dashboard version="1.1" theme="dark">
+  <label>Catalyst Center</label>
+  <row>
+    <panel>
+      <title>Device Category and Health Scores</title>
+      <chart>
+        <search>
+          <query>| pivot health_score_category RootObject sum(health_score) AS "Sum of health_score" SPLITROW category AS category SPLITCOL category SORT 100 category ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">Health Score</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Device Category and their Health Scores &amp; Count</title>
+      <chart>
+        <search>
+          <query>index=cc_network
+| spath output=health_array path=healthDistirubution{}
+| mvexpand health_array
+| rex field=health_array "\"category\":\s*\"(?&lt;category&gt;[^\"]+)\""
+| rex field=health_array "\"healthScore\":\s*(?&lt;health_score&gt;\d+)"
+| rex field=health_array "\"totalCount\":\s*(?&lt;total_count&gt;\d+)"
+| stats latest(health_score) as health_score latest(total_count) as total_count by category
+| table category, health_score, total_count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">Health Score &amp; Device Count</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisEnd</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="height">339</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <single>
+        <title>Total Device Count</title>
+        <search>
+          <query>index=cc_network
+| spath output=totalCount path=totalDevices
+| head 1
+| table totalCount</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0x800080","0xdc4e41"]</option>
+        <option name="rangeValues">[1000]</option>
+        <option name="underLabel">Total Device Count</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Network Health Score</title>
+        <search>
+          <query>index=cc_network
+| spath output=healthScore path=latestHealthScore
+| head 1
+| table healthScore</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0xd41f1f","0xd41f1f","0xf8be34","0x118832","0x118832"]</option>
+        <option name="rangeValues">[0,40,80,100]</option>
+        <option name="underLabel">Network Health Score</option>
+        <option name="unit">%</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Monitored Healthy Devices</title>
+        <search>
+          <query>index=cc_network | spath output=monitoredHealthyDevices path=monitoredHealthyDevices | head 1 | table monitoredHealthyDevices</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0x1182f3","0xdc4e41"]</option>
+        <option name="rangeValues">[1000]</option>
+        <option name="underLabel">Monitored Healthy Devices</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>No Health Devices</title>
+        <search>
+          <query>index=cc_network | spath output=noHealthDevices path=noHealthDevices | head 1 | table noHealthDevices</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0x555","0xdc4e41"]</option>
+        <option name="rangeValues">[1000]</option>
+        <option name="underLabel">No Health Devices</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Monitored Poor Health Devices</title>
+        <search>
+          <query>index=cc_network | spath output=monitoredPoorHealthDevices path=monitoredPoorHealthDevices | head 1 | table monitoredPoorHealthDevices</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0xd41f1f","0xdc4e41"]</option>
+        <option name="rangeValues">[1000]</option>
+        <option name="underLabel">Monitored Poor Health Devices</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Monitored Fair Health Devices</title>
+        <search>
+          <query>index=cc_network | spath output=monitoredFairHealthDevices path=monitoredFairHealthDevices | head 1 | table monitoredFairHealthDevices</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="drilldown">none</option>
+        <option name="rangeColors">["0xd94e17","0xd94e17"]</option>
+        <option name="rangeValues">[1000]</option>
+        <option name="underLabel">Monitored Fair Health Devices</option>
+        <option name="useColors">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Client Count</title>
+      <table>
+        <search>
+          <query>index="cc_client" 
+| spath path=response{}.scoreDetail{}
+| mvexpand response{}.scoreDetail{}
+| spath input=response{}.scoreDetail{} path=scoreCategory.value output=client_type
+| spath input=response{}.scoreDetail{} path=clientCount output=client_count
+| spath input=response{}.scoreDetail{} path=scoreValue output=health_score
+| stats latest(client_count) as client_count latest(health_score) as health_score by client_type
+| table client_type, client_count, health_score</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Health Score - All Clients</title>
+      <chart>
+        <search>
+          <query>index="cc_client"
+| spath path=response{}.scoreDetail{}
+| mvexpand response{}.scoreDetail{}
+| spath input=response{}.scoreDetail{} path=scoreCategory.value output=client_type
+| spath input=response{}.scoreDetail{} path=scoreValue output=health_score
+| search client_type="ALL"
+| stats avg(health_score) as avg_health_score
+| gauge avg_health_score 0 25 50 75 100</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.rangeValues">[0,40,80,100]</option>
+        <option name="charting.gaugeColors">["0xd41f1f","0xcba700","0x118832"]</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Health Score - Wired Clients</title>
+      <chart>
+        <search>
+          <query>index="cc_client"
+| spath path=response{}.scoreDetail{}
+| mvexpand response{}.scoreDetail{}
+| spath input=response{}.scoreDetail{} path=scoreCategory.value output=client_type
+| spath input=response{}.scoreDetail{} path=scoreValue output=health_score
+| search client_type="WIRED"
+| stats avg(health_score) as avg_health_score
+| gauge avg_health_score 0 25 50 75 100</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.rangeValues">[0,40,80,100]</option>
+        <option name="charting.gaugeColors">["0xd41f1f","0xcba700","0x118832"]</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Health Score - Wireless Clients</title>
+      <chart>
+        <search>
+          <query>index="cc_client"
+| spath path=response{}.scoreDetail{}
+| mvexpand response{}.scoreDetail{}
+| spath input=response{}.scoreDetail{} path=scoreCategory.value output=client_type
+| spath input=response{}.scoreDetail{} path=scoreValue output=health_score
+| search client_type="WIRELESS"
+| stats avg(health_score) as avg_health_score
+| gauge avg_health_score 0 25 50 75 100</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.rangeValues">[0,40,80,100]</option>
+        <option name="charting.gaugeColors">["0xd41f1f","0xcba700","0x118832"]</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Client Count - All Clients</title>
+      <chart>
+        <search>
+          <query>index="cc_client"
+| spath path=response{}.scoreDetail{}
+| mvexpand response{}.scoreDetail{}
+| spath input=response{}.scoreDetail{} path=scoreCategory.value output=client_type
+| spath input=response{}.scoreDetail{} path=clientCount output=client_count
+| search client_type="ALL"
+| stats sum(client_count) as total_client_count
+| gauge total_client_count 0 100 200 300 400</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.rangeValues">[0,50]</option>
+        <option name="charting.chart.style">minimal</option>
+        <option name="charting.gaugeColors">["0xf990f0"]</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Client Count - Wired Clients</title>
+      <chart>
+        <search>
+          <query>index="cc_client"
+| spath path=response{}.scoreDetail{}
+| mvexpand response{}.scoreDetail{}
+| spath input=response{}.scoreDetail{} path=scoreCategory.value output=client_type
+| spath input=response{}.scoreDetail{} path=clientCount output=client_count
+| search client_type="WIRED"
+| stats sum(client_count) as total_client_count
+| gauge total_client_count 0 100 200 300 400</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.rangeValues">[0,30]</option>
+        <option name="charting.chart.style">minimal</option>
+        <option name="charting.gaugeColors">["0xfab0f9"]</option>
+      </chart>
+    </panel>
+    <panel>
+      <title>Client Count - Wireless Clients</title>
+      <chart>
+        <search>
+          <query>index="cc_client"
+| spath path=response{}.scoreDetail{}
+| mvexpand response{}.scoreDetail{}
+| spath input=response{}.scoreDetail{} path=scoreCategory.value output=client_type
+| spath input=response{}.scoreDetail{} path=clientCount output=client_count
+| search client_type="WIRELESS"
+| stats sum(client_count) as total_client_count
+| gauge total_client_count 0 100 200 300 400</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.rangeValues">[0,30]</option>
+        <option name="charting.chart.style">minimal</option>
+        <option name="charting.gaugeColors">["0xf990f0"]</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Issues List</title>
+      <table>
+        <search>
+          <query>index="cc_issues" sourcetype="_json"
+| spath
+| stats values(name) as name, values(summary) as summary, values(priority) as priority, values(description) as description by id
+| table id, name, summary, priority, description</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>
