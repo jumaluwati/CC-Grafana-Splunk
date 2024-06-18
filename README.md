@@ -1,19 +1,19 @@
 
 # Cisco Catalyst Center Integration with Grafana & Splunk 🌐
 
-This project simplifies network management by aggregating critical data from Cisco DNA Center and presenting it in intuitive, easy-to-digest dashboards on Grafana and Splunk. Designed for network administrators and IT professionals, this integration centralizes health scores, client statistics, issue tracking, and license consumption metrics into a single pane of glass. By consolidating this information, users can quickly assess the state of their network, identify and troubleshoot issues, and ensure optimal performance and compliance with licensing requirements.
+This project simplifies network management by aggregating critical data from Cisco Catalyst Center and presenting it in intuitive, easy-to-digest dashboards on Grafana and Splunk. Designed for network administrators and IT professionals, this integration centralizes health scores, client statistics, issue tracking, and license consumption metrics into a single pane of glass. By consolidating this information, users can quickly assess the state of their network, identify and troubleshoot issues, and ensure optimal performance and compliance with licensing requirements.
 
 ## Main Features 🌟
 
 - **Unified Health Scores**: View comprehensive health scores for network devices and clients in one place.
-- **Real-Time Issue Tracking**: Stay ahead of network problems with a live feed of issues detected by DNA Center, all categorized and prioritized for efficient management.
+- **Real-Time Issue Tracking**: Stay ahead of network problems with a live feed of issues detected by Catalyst Center, all categorized and prioritized for efficient management.
 - **License Utilization**: Monitor your license usage with detailed reports on entitlements versus deployment.
 - **One-Click Insights**: Access all your key network metrics through Grafana or Splunk dashboards with a single click, saving time and simplifying your workflow.
 - **Dockerized Environment**: Leverage the power of Docker to spin up your monitoring environment with ease, ensuring consistency across different systems and deployments.
 
 ## Value Proposition 💡
 
-With this integration, you no longer need to navigate through multiple DNA Center dashboards to gather essential information. This solution streamlines your monitoring process, enhances visibility into network health, and empowers you to make data-driven decisions swiftly. Whether you're troubleshooting a specific client issue or conducting a broad network performance review, these dashboards are tailored to provide the insights you need in a centralized, user-friendly format.
+With this integration, you no longer need to navigate through multiple Catalyst Center dashboards to gather essential information. This solution streamlines your monitoring process, enhances visibility into network health, and empowers you to make data-driven decisions swiftly. Whether you're troubleshooting a specific client issue or conducting a broad network performance review, these dashboards are tailored to provide the insights you need in a centralized, user-friendly format.
 
 ## Prerequisites 📋
 
@@ -23,7 +23,7 @@ Before you begin, ensure you have met the following requirements:
 - **Git**: You have installed [Git](https://git-scm.com/downloads) on your machine to clone the repository.
 - **Python**: You have Python installed on your machine to run the scripts. The project is compatible with Python 3.x.
 - **Network Knowledge**: You have a basic understanding of network management and monitoring concepts, which will help you make the most of the dashboards and data provided by the project.
-- **Cisco DNA Center**: Familiarity with Cisco DNA Center APIs is beneficial, as the project interacts with these APIs to retrieve network data.
+- **Cisco Catalyst Center**: Familiarity with Cisco Catalyst Center APIs is beneficial, as the project interacts with these APIs to retrieve network data.
 - **Database Knowledge**: Basic knowledge of MySQL and database operations is recommended, as the project involves pushing data to a MySQL database.
 - **Grafana & Splunk**: Familiarity with Grafana and Splunk platforms is recommended for customizing and interpreting the dashboards.
 
