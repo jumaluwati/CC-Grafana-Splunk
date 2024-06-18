@@ -15,5 +15,5 @@ DB_CONFIG = {
 }
 
 # Splunk details
-SPLUNK_HEC_TOKEN = 'e19bf18b-e9d8-466b-9327-84e3e520e208'
+SPLUNK_HEC_TOKEN = 'INSERT YOUR TOKEN HERE'
 SPLUNK_HEC_ENDPOINT = 'http://localhost:8088/services/collector'
