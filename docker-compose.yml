@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: cisco
+      MYSQL_DATABASE: cc_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_container
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: cisco
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    restart: always
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana_container
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin  # You can change the default admin password
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    restart: always
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+volumes:
+  mysql_data:
+  grafana_data:
