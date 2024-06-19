@@ -56,7 +56,7 @@ def get_data(token):
 
 def connect_db():
     try:
-        db = mysql.connector.connect(**db_config)
+        db = mysql.connector.connect(**DB_CONFIG)
         cursor = db.cursor()
         return db, cursor
     except Error as e:
