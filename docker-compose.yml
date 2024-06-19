@@ -3,53 +3,53 @@ version: '3.8'
 services:
   db:
     image: mysql:latest
-    container_name: mysql_container_new
+    container_name: mysql_container
     environment:
       MYSQL_ROOT_PASSWORD: cisco
       MYSQL_DATABASE: cc_db
     ports:
-      - "3307:3306"  # Changed host port from 3306 to 3307
+      - "3306:3306"
     volumes:
-      - mysql_data_new:/var/lib/mysql  # Changed volume name
+      - mysql_data:/var/lib/mysql
     restart: always
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin_container_new
+    container_name: phpmyadmin_container
     environment:
       PMA_HOST: db
       PMA_USER: root
       PMA_PASSWORD: cisco
     ports:
-      - "8081:80"  # Changed host port from 8080 to 8081
+      - "8080:80"
     depends_on:
       - db
     restart: always
 
   grafana:
     image: grafana/grafana:latest
-    container_name: grafana_container_new
+    container_name: grafana_container
     environment:
-      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin  # You can change the default admin password
     ports:
-      - "3001:3000"  # Changed host port from 3000 to 3001
+      - "3000:3000"
     depends_on:
       - db
     restart: always
     volumes:
-      - grafana_data_new:/var/lib/grafana  # Changed volume name
+      - grafana_data:/var/lib/grafana
 
   splunk:
     image: splunk/splunk:latest
-    container_name: splunk_container_new
+    container_name: splunk_container
     environment:
       SPLUNK_START_ARGS: --accept-license
       SPLUNK_PASSWORD: Cisco1234!
     ports:
-      - "8001:8000"  # Changed host port from 8000 to 8001
-      - "8089:8088"  # Changed host port from 8088 to 8089
+      - "8000:8000"
+      - "8088:8088"
     restart: always
 
 volumes:
-  mysql_data_new:
-  grafana_data_new:
+  mysql_data:
+  grafana_data:
